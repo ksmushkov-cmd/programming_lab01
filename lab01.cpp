@@ -3,33 +3,34 @@
  * Вариант: 12           *
  *                       *
  *************************/
- 
+
 #include <iostream>
 #include <cmath>
 
 using namespace std;
 
 int main() {
-   
-  double a = 0.03244;
+
+  double a;
+  cout << " a = ";
+  cin >> a;
   
-  double b = 0.0172;
+  double b;
+  cout << " b = ";
+  cin >> b;
   
-  double pi = 3.14;
+  //находим величину эксцентриситета 
+  double eccentricity = sqrt(1 - (b * b)/(a * a)); 
   
-  double e = sqrt(1 - (b * b)/(a * a));
+  //площадь поверхности и объем вытянутого эллипсоида:
+  double area1 = 2.0 * M_PI * (b * b + (a * b * asin(eccentricity)) / eccentricity); 
+  double volume1 = (4.0 * M_PI * a * (b * b)) / 3.0;
+  cout << " area1 = " << area1 << " volume1 = " << volume1 << endl;
   
-  double S1 = 2 * pi * (b * b + (a * b * asin(e))/e);
-  cout << " S1 = " << S1 << endl;
-  
-  double V1 = (4 * pi * a * (b * b))/3;
-  cout << " V1 = " << V1 << endl;
-  
-  double S2 = 2 * pi * (a * a + (b * b * log((1 + e)/(1 - e)))/2 * e);
-  cout << " S2 = " << S2 << endl;
-  
-  double V2 = (4 * pi * (a * a) * b)/3;
-  cout << " V2 = " << V2 << endl;
- 
+  //площадь поверхности и объем сплюснутого эллипсоида:
+  double area2 = 2.0 * M_PI * (a * a + (b * b * log((1.0 + eccentricity)/(1.0 - eccentricity))) / 2.0 * eccentricity);
+  double volume2 = (4.0 * M_PI * (a * a) * b)/3.0;
+  cout << " area2 = " << area2 << " volume2 = " << volume2 << endl;
+
   return 0; 
 }
